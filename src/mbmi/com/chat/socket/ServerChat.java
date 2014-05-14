@@ -34,7 +34,7 @@ public class ServerChat {
                 t.start();
             }
         } catch (IOException ex) {
-            Logger.getLogger(ServerChat.class.getName()).log(Level.SEVERE, null, ex);
+            return;
         }
     }
     
@@ -67,16 +67,14 @@ public class ServerChat {
                             }
                         } else if (resp[0].equalsIgnoreCase("-m")) {
                             String[] mens = resp[1].split("&");
-                            System.out.println("--------------------------------------------------");
-                            System.out.println("Chat-POD-"+mens[0]+"-Message> "+mens[1]);
-                            System.out.println("--------------------------------------------------");
+                            System.out.println("--Chat-POD-"+mens[0]+"-Message> "+mens[1]);
                         }else{
                             System.out.println("Chat-POD-Server-Message> Invalid communication protocol");
                         }
                     }
                 }
             } catch (IOException ex) {
-                
+                return;
             }
         }
         

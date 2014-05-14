@@ -45,8 +45,7 @@ public class UserChatDAO {
             user = (UserChat) query.getSingleResult();
             em.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
+            System.out.println("Chat-POD-Server-Message> Invalid username or password");
         } finally {
             em.close();
         }

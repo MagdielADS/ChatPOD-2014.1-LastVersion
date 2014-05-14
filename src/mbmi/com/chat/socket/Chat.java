@@ -72,18 +72,14 @@ public class Chat {
                     ips.add(messages[0]);
                     write.println("-m@" + getLogin() + "&" + messages[1]);
                     write.flush();
-                    System.out.println("--------------------------------------------------");
-                    System.out.println("Chat-POD-User-Message> You say: " + messages[1]);
-                    System.out.println("--------------------------------------------------");
+                    System.out.println("--Chat-POD-User-Message> You say: " + messages[1]);
                 }else{
                     System.out.println("Chat-POD-User-Message> Invalid username or password");
                 }
             }else{
                 write.println("-m@"+getLogin()+"&"+messages[1]);
                 write.flush();
-                System.out.println("--------------------------------------------------");
-                System.out.println("Chat-POD-User-Message> You say: "+messages[1]);
-                System.out.println("--------------------------------------------------");
+                System.out.println("--Chat-POD-User-Message> You say: "+messages[1]);
             }
             
         } catch (IOException ex) {
@@ -102,8 +98,6 @@ public class Chat {
     }
     
     public static void main(String[] args) {
-        Thread t = new Thread(new ChatRunnable());
-        t.start();
         Chat c = new Chat();
         System.out.println("Chat-POD-Server-Message> Waiting for connection...");
         Scanner in = new Scanner(System.in);
@@ -113,14 +107,27 @@ public class Chat {
         String login = in.nextLine();
         System.out.print("Chat-POD-User-Message> Enter your password: ");
         String pass = in.nextLine();
-
         c.setLogin(login);
         c.setPassword(pass);
+        
+        Thread t = new Thread(new ChatRunnable());
+        t.start();
+        
         System.out.println("--------------------------------------------------");
         System.out.println("Chat-POD-User-Message> Starting communication...");
         System.out.println("--------------------------------------------------");
+        
+        
+        //
+        //Comando para enviar mensagem:
+        //messagefrom-ipDoServidor#mensagem
+        //
+        
+        
+        
+        
+        
         while (!msg.equalsIgnoreCase("CLOSE")) {
-            System.out.print("Chat-POD-User-Message> ");
             msg = in.nextLine();
             String[] controls = msg.split("-");
             if (controls[0].equalsIgnoreCase("MESSAGEFROM")) {
